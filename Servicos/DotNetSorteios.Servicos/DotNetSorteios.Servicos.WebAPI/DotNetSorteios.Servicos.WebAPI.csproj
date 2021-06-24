@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Datatable.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SorteioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
