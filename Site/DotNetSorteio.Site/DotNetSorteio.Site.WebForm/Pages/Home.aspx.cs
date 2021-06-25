@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DotNetSorteios.Servicos.Modelos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,9 +25,11 @@ namespace DotNetSorteio.Site.WebForm.Pages
         {
             try
             {
+                Usuarios usuario = (Usuarios)Session["Usuario"];
+
                 using (var client = new HttpClient())
                 {
-                    var response = await client.GetAsync("https://localhost:44371/api/Sorteio/ListarSorteios");
+                    var response = await client.GetAsync("http://localhost/DotNetSorteios.Servicos.WebAPI/api/Sorteio/ListarSorteios?usuarioId=" + usuario.UsuarioId);
                     var IntegrationJsonString = await response.Content.ReadAsStringAsync();
 
                     DataTable dt = (DataTable)JsonConvert.DeserializeObject(IntegrationJsonString, (typeof(DataTable)));                    
@@ -40,6 +43,25 @@ namespace DotNetSorteio.Site.WebForm.Pages
                 
             }
 
+        }
+
+        protected void gridSoteio_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if(e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                RepeaterItem item = e.Item;
+
+                string usuarioId = (item.FindControl("hdfUsuarioId") as HiddenField).Value;
+
+                if(string.IsNullOrEmpty(usuarioId))
+                {
+                    (item.FindControl("btnParticipar") as Button).Visible = true;
+                }
+                else
+                {
+                    (item.FindControl("btnDeixar") as Button).Visible = true;
+                }
+            }
         }
     }
 }

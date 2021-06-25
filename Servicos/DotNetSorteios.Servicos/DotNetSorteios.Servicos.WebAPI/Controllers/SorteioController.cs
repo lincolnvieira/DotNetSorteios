@@ -13,11 +13,11 @@ namespace DotNetSorteios.Servicos.WebAPI.Controllers
     public class SorteioController : ApiController
     {
         [HttpGet]
-        public DataTable ListarSorteios()
+        public DataTable ListarSorteios(int usuarioId)
         {
             ServiceSorteio serviceSorteio = new ServiceSorteio();
 
-            return serviceSorteio.ListarSorteios();                  
+            return serviceSorteio.ListarSorteios(usuarioId);                  
         }
 
     }

@@ -9,13 +9,14 @@ namespace DotNetSorteios.Servicos.AcessoDados
 {
     public class SorteioDAO : DAO
     {
-        public DataTable ListarSorteios()
+        public DataTable ListarSorteios(int usuarioId)
         {
-            //string pesquisar = "SELECT * FROM Sorteios";
-            //var v = QuerySingle<DataTable>(pesquisar);
-            //return v;
-
-            DataTable dt = new DataTable();
+            string pesquisar = @"SELECT Sorteios.SorteioId, Titulo, Sorteios.Descricao, SituacoesSorteio.Descricao as Situacao, convert(date,DataInicio) as DataInicio , convert(date,DataFim) as DataFim, ParticipantesSorteio.UsuarioId 
+                                 FROM Sorteios
+                                 LEFT JOIN SituacoesSorteio ON SituacoesSorteio.SituacaoSorteioId = Sorteios.SituacaoSorteioId
+                                 LEFT JOIN ParticipantesSorteio ON ParticipantesSorteio.SorteioId = Sorteios.SorteioId AND (ParticipantesSorteio.UsuarioId = " + usuarioId + " OR ParticipantesSorteio.UsuarioId IS NULL)";
+            
+            DataTable dt = ExecuteReader(pesquisar);
             return dt;
         }
     }

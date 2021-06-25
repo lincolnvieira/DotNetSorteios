@@ -8,6 +8,6 @@ namespace DotNetSorteios.Servicos.WebAPI.Service.Interfaces
 {
     public interface IServiceSorteio
     {
-        DataTable ListarSorteios();
+        DataTable ListarSorteios(int usuarioId);
     }
 }

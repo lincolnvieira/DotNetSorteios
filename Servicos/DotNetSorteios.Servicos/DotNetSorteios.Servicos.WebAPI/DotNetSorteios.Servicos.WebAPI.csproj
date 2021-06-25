@@ -14,7 +14,7 @@
     <RootNamespace>DotNetSorteios.Servicos.WebAPI</RootNamespace>
     <AssemblyName>DotNetSorteios.Servicos.WebAPI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44371</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -133,7 +133,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65300</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44371/</IISUrl>
+          <IISUrl>http://localhost/DotNetSorteios.Servicos.WebAPI</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -10,11 +10,11 @@ namespace DotNetSorteios.Servicos.WebAPI.Service
 {
     public class ServiceSorteio : IServiceSorteio
     {
-        public DataTable ListarSorteios()
+        public DataTable ListarSorteios(int usuarioId)
         {
             SorteioDAO sorteioDAO = new SorteioDAO();
 
-            return sorteioDAO.ListarSorteios();
+            return sorteioDAO.ListarSorteios(usuarioId);
         }
     }
 }

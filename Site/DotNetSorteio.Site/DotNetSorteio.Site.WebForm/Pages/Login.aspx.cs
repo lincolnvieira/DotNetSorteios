@@ -1,5 +1,6 @@
 ﻿using DotNetSorteio.Site.WebForm.Functions;
 using DotNetSorteios.Servicos.Modelos;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,38 @@ namespace DotNetSorteio.Site.WebForm.Pages
 
         protected async void btnLogin_Click(object sender, EventArgs e)
         {
-            Usuarios usuario = new Usuarios();
-            usuario.Email = txtEmail.Text;
-            usuario.Senha = txtSenha.Text;
-            
-
-            using (var client = new HttpClient())
+            try
             {
-                var response = await client.GetAsync("https://localhost:44371/api/Login/RealizarLogin?email=" + usuario.Email + "&senha=" + usuario.Senha);
-                await response.Content.ReadAsStringAsync();
+                Usuarios usuario = new Usuarios();
+                usuario.Email = txtEmail.Text;
+                usuario.Senha = txtSenha.Text;
+
+
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync("http://localhost/DotNetSorteios.Servicos.WebAPI/api/Login/RealizarLogin?email=" + usuario.Email + "&senha=" + usuario.Senha);
+                    var IntegrationJsonString = await response.Content.ReadAsStringAsync();
+
+                    usuario = JsonConvert.DeserializeObject<Usuarios>(IntegrationJsonString);
+                }
+
+                if (usuario.UsuarioId != 0)
+                {
+                    Session["Usuario"] = usuario;
+                    //Session.Add("Usuario", usuario);
+
+                    Response.Redirect("~/Pages/Home.aspx", false);
+                }
+                else
+                {
+                    //sem usuario
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }           
 
         }
     }

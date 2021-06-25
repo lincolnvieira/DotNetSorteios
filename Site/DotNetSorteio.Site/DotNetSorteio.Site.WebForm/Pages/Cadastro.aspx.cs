@@ -51,7 +51,7 @@ namespace DotNetSorteio.Site.WebForm.Pages.Layout
 
             using (var client = new HttpClient())
             {
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:44371/api/Usuarios/InserirUsuario")
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/DotNetSorteios.Servicos.WebAPI/api/Usuarios/InserirUsuario")
                 {
                     Content = new StringContent(message, Encoding.UTF8, "application/json")
                 };

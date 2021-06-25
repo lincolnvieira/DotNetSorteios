@@ -20,7 +20,7 @@ namespace DotNetSorteios.Servicos.WebAPI.Controllers
             Usuarios usuario = serviceLogin.RealizarLogin(email, senha);
 
             if (usuario != null)
-                return Ok();
+                return Ok(usuario);
             else
                 return BadRequest();
         }
